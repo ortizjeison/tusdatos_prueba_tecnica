@@ -18,7 +18,7 @@ users = {
 }
 
 
-
+#Username/Password validation logic
 @auth.verify_password
 def verify_password(username: str, password: str) -> t.Union[str, None]:
     if (
@@ -29,9 +29,13 @@ def verify_password(username: str, password: str) -> t.Union[str, None]:
     return None
 
 
+#Schema creation
+
             #Demandado
 class queryDemandado(Schema):
-    documento = fields.String(required=True)
+    
+    #define input field and validation
+    documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
 
 @app.get('/consultarDemandado')
 @app.auth_required(auth)
@@ -60,7 +64,8 @@ def queryByDocDemandado():
 
             #Demandante
 class queryDemandante(Schema):
-    documento = fields.String(required=True)
+    #define input field and validation
+    documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
 
 
 @app.get('/consultarDemandante')

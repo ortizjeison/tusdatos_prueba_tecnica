@@ -17,8 +17,7 @@ def get_datos_generales(idJuicio):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec',
-    'Cookie': 'CJ=2853568778.31775.0000'
+    'host': 'api.funcionjudicial.gob.ec'
     }
 
     response = requests.request("GET", url, headers=headers, data=payload, timeout=60)

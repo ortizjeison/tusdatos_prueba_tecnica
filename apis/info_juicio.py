@@ -1,3 +1,4 @@
+import random
 import requests
 import json
 
@@ -23,11 +24,27 @@ def get_info_juicio(idJuicio):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec',
-    'Cookie': 'CJ=2853568778.31775.0000'
+    'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response = requests.request("GET", url, headers=headers, data=payload, timeout=60,proxies=proxies)
+
+
+    ip_addresses = ["186.215.87.194:6010","186.103.130.93:8080","38.54.101.254:9000","38.54.6.39:3128"]
+    
+    while True:
+        try:
+            proxy = random.randint(0, len(ip_addresses) - 1)
+            print(proxy)
+            proxies = {"http": ip_addresses[proxy]}
+            response = requests.request("GET", url, headers=headers, data=payload, timeout=60,proxies=proxies)
+            
+            print(f"Proxy currently being used: {ip_addresses[proxy]}")
+            break
+        except Exception as e:
+            print(e)
+            print("Error, looking for another proxy")
+
+    
 
     return response.json()
 

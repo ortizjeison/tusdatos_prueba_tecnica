@@ -1,3 +1,4 @@
+import random
 import requests
 import json
 from pysondb import db
@@ -5,10 +6,6 @@ from datetime import datetime
 
 def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura):
 
-    proxies = {
-   'http': 'http://186.215.87.194:6010',
-   'http': 'http://186.103.130.93:8080'
-    }
 
     url = "https://api.funcionjudicial.gob.ec/EXPEL-CONSULTA-CAUSAS-SERVICE/api/consulta-causas/informacion/actuacionesJudiciales"
 
@@ -33,11 +30,23 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec',
-    'Cookie': 'CJ=2853568778.31775.0000'
+    'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=60,proxies=proxies)
+
+    ip_addresses = ["186.215.87.194:6010","186.103.130.93:8080","38.54.101.254:9000","38.54.6.39:3128"]
+    
+    while True:
+        try:
+            proxy = random.randint(0, len(ip_addresses) - 1)
+            print(proxy)
+            proxies = {"http": ip_addresses[proxy]}
+            response = requests.request("POST", url, headers=headers, data=payload, timeout=60,proxies=proxies)
+            print(f"Proxy currently being used: {ip_addresses[proxy]}")
+            break
+        except Exception as e:
+            print(e)
+            print("Error, looking for another proxy")
     
     try:
         resp = response.json()
@@ -51,4 +60,4 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
 
 if __name__ == "__main__":
     actuaciones_judiciales = get_actuaciones_judiciales("25989939","13284202406765","13284","27362897","UNIDAD JUDICIAL PENAL DE MANTA")
-    print(actuaciones_judiciales)
+    #print(actuaciones_judiciales)

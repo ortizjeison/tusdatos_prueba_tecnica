@@ -30,8 +30,7 @@ def consultar_causas_demandado(num_causas,documento):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec',
-    'Cookie': 'CJ=2853568778.31775.0000'
+    'host': 'api.funcionjudicial.gob.ec'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
@@ -81,8 +80,7 @@ def consultar_causas_demandante(num_causas,documento):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec',
-    'Cookie': 'CJ=2853568778.31775.0000'
+    'host': 'api.funcionjudicial.gob.ec'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload, timeout=60)

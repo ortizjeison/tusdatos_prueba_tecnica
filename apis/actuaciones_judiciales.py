@@ -1,5 +1,7 @@
 import requests
 import json
+from pysondb import db
+from datetime import datetime
 
 def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura):
 
@@ -35,7 +37,10 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     try:
         resp = response.json()
     except:
-        print(f'idJuicio: {idJuicio}. Error: {response.text}')
+        error_log = {'Timestamp':str(datetime.now()),'idJuicio': idJuicio, "Error": response.text}
+        print(error_log)
+        database = db.getDb('errors.json')
+        database.add(error_log)
     return resp 
 
 if __name__ == "__main__":

@@ -5,12 +5,11 @@ import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from apis.api_handler import query_demandado
-
-import os
-import json
+from apis.api_handler import query_demandante
 
 app = APIFlask(__name__)
 auth = HTTPBasicAuth()
+app.config['JSON_SORT_KEYS'] = False
 
 users = {
     'userA': generate_password_hash('I_know_this_is_a_bad_practice'),
@@ -56,7 +55,6 @@ def queryByDocDemandado():
 
         #Run query scripts
         causas_demandado = query_demandado(documento)
-
         return causas_demandado
     
     except ValidationError as error:
@@ -85,9 +83,11 @@ def queryByDocDemandante():
     
     try:
         schema.load(inputData)
-        return f"consultando demandante {documento}"
+        print(f"consultando demandante {documento}")
 
         #Run query scripts
+        causas_demandante = query_demandante(documento)
+        return causas_demandante
     
     except ValidationError as error:
         return error.messages

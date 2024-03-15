@@ -1,13 +1,12 @@
-from apiflask import APIFlask, Schema, abort, HTTPBasicAuth
-from apiflask.fields import Integer, String
-from apiflask.validators import Length, OneOf
+from apiflask import APIFlask, Schema, HTTPBasicAuth
 from flask import request
-from marshmallow import Schema, fields, post_load, validates, validate, ValidationError
-import os
-import json
+from marshmallow import Schema, fields, validate, ValidationError
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 
+import os
+import json
+#from apis.contar_causas import *
 
 app = APIFlask(__name__)
 auth = HTTPBasicAuth()

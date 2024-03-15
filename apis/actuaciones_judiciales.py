@@ -31,8 +31,12 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
-
-    return response.json()
+    
+    try:
+        resp = response.json()
+    except:
+        print(f'idJuicio: {idJuicio}. Error: {response.text}')
+    return resp 
 
 if __name__ == "__main__":
     actuaciones_judiciales = get_actuaciones_judiciales("25989939","13284202406765","13284","27362897","UNIDAD JUDICIAL PENAL DE MANTA")

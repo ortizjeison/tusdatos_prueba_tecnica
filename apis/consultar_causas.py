@@ -109,4 +109,4 @@ if __name__ == "__main__":
     print(causas_demandado)
 
     causas_demandante = consultar_causas_demandante(157,'0968599020001')
-    print(causas_demandado)
+    #print(causas_demandado)

@@ -4,9 +4,10 @@ from marshmallow import Schema, fields, validate, ValidationError
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from apis.api_handler import query_demandado
+
 import os
 import json
-#from apis.contar_causas import *
 
 app = APIFlask(__name__)
 auth = HTTPBasicAuth()
@@ -51,9 +52,12 @@ def queryByDocDemandado():
     
     try:
         schema.load(inputData)
-        return f"consultando demandado {documento}"
+        print(f"consultando demandado {documento}")
 
         #Run query scripts
+        causas_demandado = query_demandado(documento)
+
+        return causas_demandado
     
     except ValidationError as error:
         return error.messages

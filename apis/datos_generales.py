@@ -21,7 +21,7 @@ def get_datos_generales(idJuicio):
     'Cookie': 'CJ=2853568778.31775.0000'
     }
 
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
 
     return response.json()
 

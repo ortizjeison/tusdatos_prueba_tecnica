@@ -5,6 +5,11 @@ from datetime import datetime
 
 def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura):
 
+    proxies = {
+   'http': 'http://186.215.87.194:6010',
+   'http': 'http://186.103.130.93:8080'
+    }
+
     url = "https://api.funcionjudicial.gob.ec/EXPEL-CONSULTA-CAUSAS-SERVICE/api/consulta-causas/informacion/actuacionesJudiciales"
 
     payload = json.dumps({
@@ -32,7 +37,7 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     'Cookie': 'CJ=2853568778.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60,proxies=proxies)
     
     try:
         resp = response.json()
@@ -41,6 +46,7 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
         print(error_log)
         database = db.getDb('errors.json')
         database.add(error_log)
+
     return resp 
 
 if __name__ == "__main__":

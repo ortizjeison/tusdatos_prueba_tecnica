@@ -8,6 +8,7 @@ from .actuaciones_judiciales import *
 
 from pysondb import db
 from datetime import datetime
+from multiprocessing import Process
 
 def query_demandado(documento):
     response = {}
@@ -16,6 +17,8 @@ def query_demandado(documento):
     causas = consultar_causas_demandado(num_causas,documento)
 
     #Query info_juicio for each element (juicio)
+
+
 
     for juicio in causas:
         
@@ -35,6 +38,7 @@ def query_demandado(documento):
         except:
             actuaciones_judiciales = {}
 
+
         juicio['info_juicio'] = info_juicio
         juicio['datos_generales'] = datos_generales
         juicio['actuaciones_judiciales'] = actuaciones_judiciales
@@ -49,7 +53,6 @@ def query_demandado(documento):
     id = database.add(response)
     return response
 
-#@Todo: query_demandante
 
 def query_demandante(documento):
     response = {}

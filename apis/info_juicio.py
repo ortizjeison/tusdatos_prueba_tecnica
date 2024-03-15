@@ -4,6 +4,11 @@ import json
 
 def get_info_juicio(idJuicio):
 
+    proxies = {
+   'http': 'http://186.215.87.194:6010',
+   'http': 'http://186.103.130.93:8080'
+    }
+
     url = f"https://api.funcionjudicial.gob.ec/EXPEL-CONSULTA-CAUSAS-SERVICE/api/consulta-causas/informacion/getInformacionJuicio/{idJuicio}"
 
     payload = {}
@@ -22,7 +27,7 @@ def get_info_juicio(idJuicio):
     'Cookie': 'CJ=2853568778.31775.0000'
     }
 
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload, timeout=60,proxies=proxies)
 
     return response.json()
 

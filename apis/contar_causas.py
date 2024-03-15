@@ -33,7 +33,7 @@ def contar_causas_demandado(documento):
     'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
     return response.text
 
 
@@ -68,7 +68,7 @@ def contar_causas_demandante(documento):
     'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
     return response.text
 
 

@@ -34,7 +34,7 @@ def consultar_causas_demandado(num_causas,documento):
     'Cookie': 'CJ=2853568778.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
 
     cleaned_response = []
 
@@ -85,7 +85,7 @@ def consultar_causas_demandante(num_causas,documento):
     'Cookie': 'CJ=2853568778.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
 
     cleaned_response = []
 

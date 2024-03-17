@@ -1,4 +1,4 @@
-import requests
+from .custom_requests import request
 import json
 
 
@@ -30,10 +30,11 @@ def contar_causas_demandado(documento):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec'
+    'host': 'api.funcionjudicial.gob.ec',
+    'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
+    response = request("POST", url,headers,payload)
     return response.text
 
 
@@ -65,10 +66,13 @@ def contar_causas_demandante(documento):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec'
+    'host': 'api.funcionjudicial.gob.ec',
+    'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
+    response = request("POST", url,headers,payload,)
+    
+    print("Contar_causas done")
     return response.text
 
 

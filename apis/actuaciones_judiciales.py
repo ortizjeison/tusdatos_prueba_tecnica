@@ -1,5 +1,4 @@
-import random
-import requests
+from .custom_requests import request
 import json
 from pysondb import db
 from datetime import datetime
@@ -34,24 +33,11 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     }
 
 
-    ip_addresses = ["186.215.87.194:6010","186.103.130.93:8080","38.54.101.254:9000","38.54.6.39:3128"]
-    
-    while True:
-        try:
-            proxy = random.randint(0, len(ip_addresses) - 1)
-            print(proxy)
-            proxies = {"http": ip_addresses[proxy]}
-            response = requests.request("POST", url, headers=headers, data=payload, timeout=60,proxies=proxies)
-            print(f"Proxy currently being used: {ip_addresses[proxy]}")
-            break
-        except Exception as e:
-            print(e)
-            print("Error, looking for another proxy")
-    
     try:
+        response = request("POST", url, headers,payload)
         resp = response.json()
-    except:
-        error_log = {'Timestamp':str(datetime.now()),'idJuicio': idJuicio, "Error": response.text}
+    except Exception as e:
+        error_log = {'timestamp':str(datetime.now()),'idJuicio': idJuicio, "Server_response": response.text, "exception": str(e)}
         print(error_log)
         database = db.getDb('errors.json')
         database.add(error_log)
@@ -59,5 +45,5 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
     return resp 
 
 if __name__ == "__main__":
-    actuaciones_judiciales = get_actuaciones_judiciales("25989939","13284202406765","13284","27362897","UNIDAD JUDICIAL PENAL DE MANTA")
-    #print(actuaciones_judiciales)
+    actuaciones_judiciales = get_actuaciones_judiciales("26010324", '09332202403102', 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL', "27384010", 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL')
+    print(actuaciones_judiciales)

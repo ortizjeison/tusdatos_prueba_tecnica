@@ -1,4 +1,4 @@
-import requests
+from .custom_requests import request
 import json
 
 
@@ -30,10 +30,11 @@ def consultar_causas_demandado(num_causas,documento):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec'
+    'host': 'api.funcionjudicial.gob.ec',
+    'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
+    response = request("POST", url, headers,payload)
 
     cleaned_response = []
 
@@ -83,7 +84,7 @@ def consultar_causas_demandante(num_causas,documento):
     'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
+    response =request("POST", url, headers, payload)
 
     cleaned_response = []
 
@@ -98,13 +99,13 @@ def consultar_causas_demandante(num_causas,documento):
             }
         
         cleaned_response.append(causa_cleaned)
-    
+    print("Consultar_causas Done")
     return cleaned_response 
 
 
 if __name__ == "__main__":
     causas_demandado = consultar_causas_demandado(105,'1791251237001')
-    print(causas_demandado)
+    #print(causas_demandado)
 
     causas_demandante = consultar_causas_demandante(157,'0968599020001')
     #print(causas_demandado)

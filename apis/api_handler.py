@@ -8,24 +8,34 @@ from .actuaciones_judiciales import *
 
 from pysondb import db
 from datetime import datetime
-from multiprocessing import Process
 
 def query_demandado(documento):
     response = {}
     
-    num_causas = contar_causas_demandado(documento)
-    causas = consultar_causas_demandado(num_causas,documento)
+    try:
+        num_causas = contar_causas_demandado(documento)
+    except Exception as e:
+            print(f'Error when calling contar_causas_demandado: {e}')
+    try:
+        causas = consultar_causas_demandado(num_causas,documento)
+    except Exception as e:
+            print(f'Error when calling consultar_causas_demandado: {e}')
 
     #Query info_juicio for each element (juicio)
-
-
 
     for juicio in causas:
         
         id_juicio = juicio.get('idJuicio')
 
-        info_juicio = get_info_juicio(id_juicio)
-        datos_generales = get_datos_generales(id_juicio)
+        try:
+            info_juicio = get_info_juicio(id_juicio)
+        except Exception as e:
+            print(f'Error when calling get_info_juicio: {e} ({id_juicio})')
+        
+        try:            
+            datos_generales = get_datos_generales(id_juicio)
+        except Exception as e:
+            print(f'Error when calling get_datos_generales: {e} ({id_juicio})')
 
         #Get data from datos_generales to query actuaciones_judiciales
         idMovimientoJuicioIncidente = datos_generales[0].get('lstIncidenteJudicatura')[0].get('idMovimientoJuicioIncidente')
@@ -35,7 +45,8 @@ def query_demandado(documento):
 
         try:
             actuaciones_judiciales = get_actuaciones_judiciales(idMovimientoJuicioIncidente,id_juicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura)
-        except:
+        except Exception as e:
+            print(f'Error when calling get_actuaciones_judiciales: {e} ({idMovimientoJuicioIncidente,id_juicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura})')
             actuaciones_judiciales = {}
 
 
@@ -57,8 +68,15 @@ def query_demandado(documento):
 def query_demandante(documento):
     response = {}
     
-    num_causas = contar_causas_demandante(documento)
-    causas = consultar_causas_demandante(num_causas,documento)
+    
+    try:
+        num_causas = contar_causas_demandante(documento)
+    except Exception as e:
+        print(f'Error when calling contar_causas_demandante: {e}')
+    try:
+        causas = consultar_causas_demandante(num_causas,documento)
+    except Exception as e:
+        print(f'Error when calling consultar_causas_demandante: {e}')
 
     #Query info_juicio for each element (juicio)
 
@@ -66,8 +84,16 @@ def query_demandante(documento):
         
         id_juicio = juicio.get('idJuicio')
 
-        info_juicio = get_info_juicio(id_juicio)
-        datos_generales = get_datos_generales(id_juicio)
+        try:
+            info_juicio = get_info_juicio(id_juicio)
+        except Exception as e:
+            print(f'Error when calling get_info_juicio: {e}')
+        
+        try:
+            
+            datos_generales = get_datos_generales(id_juicio)
+        except Exception as e:
+            print(f'Error when calling get_datos_generales: {e}')
 
         #Get data from datos_generales to query actuaciones_judiciales
         idMovimientoJuicioIncidente = datos_generales[0].get('lstIncidenteJudicatura')[0].get('idMovimientoJuicioIncidente')
@@ -77,7 +103,8 @@ def query_demandante(documento):
 
         try:
             actuaciones_judiciales = get_actuaciones_judiciales(idMovimientoJuicioIncidente,id_juicio,idJudicatura,idIncidenteJudicatura,nombreJudicatura)
-        except:
+        except Exception as e:
+            print(f'Error when calling get_actuaciones_judiciales: {e}')
             actuaciones_judiciales = {}
 
         juicio['info_juicio'] = info_juicio

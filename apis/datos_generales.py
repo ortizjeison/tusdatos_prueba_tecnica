@@ -1,5 +1,4 @@
-import requests
-import json
+from .custom_requests import request
 
 def get_datos_generales(idJuicio):
     
@@ -17,13 +16,14 @@ def get_datos_generales(idJuicio):
     'Sec-Fetch-Site': 'same-site',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Dest': 'empty',
-    'host': 'api.funcionjudicial.gob.ec'
+    'host': 'api.funcionjudicial.gob.ec',
+    'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
+    response = request("GET", url, headers,payload)
 
     return response.json()
 
 if __name__ == "__main__":
     datos_generales = get_datos_generales("13284202406765")
-    #print(datos_generales)
+    print(datos_generales)

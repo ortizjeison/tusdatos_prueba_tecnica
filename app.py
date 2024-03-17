@@ -5,7 +5,7 @@ from flask import render_template
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 from pysondb import db
-import jinja2
+
 from apis.api_handler import query_demandado
 from apis.api_handler import query_demandante
 
@@ -45,7 +45,7 @@ class getResults(Schema):
     #define input field and validation
     documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
 
-@app.get('/consultarDemandado')
+@app.post('/consultarDemandado')
 @app.auth_required(auth)
 def queryByDocDemandado():
 
@@ -77,7 +77,7 @@ class queryDemandante(Schema):
     documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
 
 
-@app.get('/consultarDemandante')
+@app.post('/consultarDemandante')
 @app.auth_required(auth)
 def queryByDocDemandante():
 
@@ -140,6 +140,6 @@ def queryByIdResults():
         pass
 
 
-@app.route('/docs')
+@app.route('/apiDoc')
 def my_redoc():
-    return render_template('api_doc.html')
+    return render_template('docs.html')

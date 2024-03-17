@@ -1,6 +1,7 @@
-from apiflask import APIFlask, Schema, HTTPBasicAuth
+from apiflask import APIFlask, Schema, HTTPBasicAuth, abort
 from flask import request
 from marshmallow import Schema, fields, validate, ValidationError
+from flask import render_template
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 from pysondb import db
@@ -124,11 +125,19 @@ def queryByIdResults():
         print(f"consultando resultados {id}")
 
         #Run query scripts
-        database = db.getDb('database.json')
-        results = database.find(id)
-        return results
+        try:
+            database = db.getDb('database.json')
+            results = database.find(id)
+            return results
+        except:
+            abort(404,message=f'Request was not found by ID')
     
     except ValidationError as error:
         return error.messages
     finally:
         pass
+
+
+@app.route('/redoc')
+def my_redoc():
+    return render_template('redoc.html')

@@ -5,7 +5,7 @@ from flask import render_template
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 from pysondb import db
-
+import jinja2
 from apis.api_handler import query_demandado
 from apis.api_handler import query_demandante
 
@@ -13,10 +13,12 @@ app = APIFlask(__name__)
 auth = HTTPBasicAuth()
 app.config['JSON_SORT_KEYS'] = False
 
+
 users = {
     'userA': generate_password_hash('I_know_this_is_a_bad_practice'),
     'userB': generate_password_hash('So_I_Do'),
 }
+
 
 
 #Username/Password validation logic
@@ -138,6 +140,6 @@ def queryByIdResults():
         pass
 
 
-@app.route('/redoc')
+@app.route('/docs')
 def my_redoc():
-    return render_template('/swagger-ui/index.html')
+    return render_template('api_doc.html')

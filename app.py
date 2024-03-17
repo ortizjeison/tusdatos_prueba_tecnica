@@ -140,4 +140,4 @@ def queryByIdResults():
 
 @app.route('/redoc')
 def my_redoc():
-    return render_template('redoc.html')
+    return render_template('/swagger-ui/index.html')

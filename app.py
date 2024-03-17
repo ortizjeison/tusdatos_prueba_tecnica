@@ -3,6 +3,7 @@ from flask import request
 from marshmallow import Schema, fields, validate, ValidationError
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
+from pysondb import db
 
 from apis.api_handler import query_demandado
 from apis.api_handler import query_demandante
@@ -36,10 +37,14 @@ class queryDemandado(Schema):
     #define input field and validation
     documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
 
+class getResults(Schema):
+    
+    #define input field and validation
+    documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
+
 @app.get('/consultarDemandado')
 @app.auth_required(auth)
 def queryByDocDemandado():
-
 
     documento = request.args.get("documento")
     
@@ -88,6 +93,40 @@ def queryByDocDemandante():
         #Run query scripts
         causas_demandante = query_demandante(documento)
         return causas_demandante
+    
+    except ValidationError as error:
+        return error.messages
+    finally:
+        pass
+
+
+
+class queryResults(Schema):
+    
+    #define input field and validation
+    id = fields.Integer(required=True)
+
+
+@app.get('/consultarResultados')
+@app.auth_required(auth)
+def queryByIdResults():
+
+    id = request.args.get("id")
+    
+    #Load Schema
+    schema = queryResults()
+
+    #Set input data
+    inputData = {"id": id}
+    
+    try:
+        schema.load(inputData)
+        print(f"consultando resultados {id}")
+
+        #Run query scripts
+        database = db.getDb('database.json')
+        results = database.find(id)
+        return results
     
     except ValidationError as error:
         return error.messages

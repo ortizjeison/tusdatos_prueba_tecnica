@@ -55,8 +55,7 @@ def query_demandado(documento):
         juicio['actuaciones_judiciales'] = actuaciones_judiciales
 
     response['tipo_consulta'] = 'Demandado'
-    response['documento_demandado'] = documento
-    response['documento_demandado'] = documento
+    response['documento'] = documento
     response['fecha_de_consulta'] = str(datetime.now())
     response['causas'] = causas
 
@@ -112,8 +111,7 @@ def query_demandante(documento):
         juicio['actuaciones_judiciales'] = actuaciones_judiciales
 
     response['tipo_consulta'] = 'Demandante'
-    response['documento_demandado'] = documento
-    response['documento_demandado'] = documento
+    response['documento'] = documento
     response['fecha_de_consulta'] = str(datetime.now())
     response['causas'] = causas
 

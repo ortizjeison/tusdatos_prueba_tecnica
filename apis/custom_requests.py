@@ -13,7 +13,8 @@ def request(method,url,headers,payload):
                 # Retry request 
                 continue
             else:
-                print(f'Ready in attempt: {attempt}')
+                if attempt > 0:
+                    print(f'Ready in attempt: {attempt}')
                 break
         except Exception as e:
             print(f'Exteption {e}')

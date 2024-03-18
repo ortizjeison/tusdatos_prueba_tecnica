@@ -23,7 +23,7 @@ La documentación de estas pruebas, puede ser visualizado en documentacion_prueb
 Para el desarrollo del API se implementaron las librerías Flask y APIFlask.
 
 La documentación del uso del API puede encontrarse en el endpoint:
-http://127.0.0.1:5000/apiDoc y en el archivo []
+http://127.0.0.1:5000/apiDoc y en https://app.swaggerhub.com/apis/ortizjeison/my-project/1.0.0
 
 ### Autorización y autenticación
 Se implementó una autenticación básica, en este caso, los usuarios registrados y sus contraseñas se encuentran en el código (No replicar, es una mala práctica)
@@ -37,3 +37,4 @@ Para la vista se desarrolló el endpoint /verResultados, el cual recibe un docum
 ## Authors
 
 - [Jeison Fernelix Ortiz López](https://github.com/ortizjeison)
+

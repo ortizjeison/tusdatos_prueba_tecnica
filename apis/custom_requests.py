@@ -20,7 +20,7 @@ def request(method,url,headers,payload):
             print(f'Exteption {e}')
             if attempt == max_attempts-1:
                 error_log = {'timestamp':str(datetime.now()),'url': url, "server_response": response.text, "exception": str(e)}
-                database = db.getDb('requests_errors.json')
+                database = db.getDb('request_errors.json')
                 database.add(error_log)
             pass
     return response

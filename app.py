@@ -9,7 +9,7 @@ from pysondb import db
 from apis.api_handler import query_demandado
 from apis.api_handler import query_demandante
 
-app = APIFlask(__name__)
+app = APIFlask(__name__, docs_path=None)
 auth = HTTPBasicAuth()
 app.config['JSON_SORT_KEYS'] = False
 

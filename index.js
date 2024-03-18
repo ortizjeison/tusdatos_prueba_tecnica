@@ -5,7 +5,7 @@ const newman = require('newman')
 const PARALLEL_RUN_COUNT = 15
 
 const parametersForTestRun = {
-    collection: path.join(__dirname, 'postman\\api_test_demandante.postman_collection.json'), // your collection
+    collection: path.join(__dirname, 'postman\\api_test_demandado.postman_collection.json'), // your collection
     reporters: 'cli'
 };
 

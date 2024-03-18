@@ -1,3 +1,4 @@
+import json
 from apiflask import APIFlask, Schema, HTTPBasicAuth, abort
 from flask import request
 from marshmallow import Schema, fields, validate, ValidationError
@@ -5,6 +6,7 @@ from flask import render_template
 import typing as t
 from werkzeug.security import generate_password_hash, check_password_hash
 from pysondb import db
+from json2html import *
 
 from apis.api_handler import query_demandado
 from apis.api_handler import query_demandante
@@ -141,5 +143,43 @@ def queryByIdResults():
 
 
 @app.route('/apiDoc')
-def my_redoc():
+def docsView():
     return render_template('docs.html')
+
+@app.route('/verResultados')
+def resultsView():
+
+    id = request.args.get("id")
+
+    #Load Schema
+    schema = queryResults()
+
+    #Set input data
+    inputData = {"id": id}
+    try:
+        schema.load(inputData)
+        print(f"consultando resultados {id}")
+
+        #Run query scripts
+        try:
+            database = db.getDb('database.json')
+            results = database.getById(id)
+            
+            tipo_consulta = results['tipo_consulta']
+            documento = results['documento']
+            fecha_de_consulta = results['fecha_de_consulta']
+            id = results['id']
+
+            causas = results['causas']
+            num_registros=len(causas)
+            table = json2html.convert(json = json.dumps(causas))
+            return render_template(template_name_or_list='/resultados.html',
+                                   table=table,tipo_consulta=tipo_consulta,documento=documento,fecha_de_consulta=fecha_de_consulta,id=id,num_registros=num_registros)
+            
+        except Exception as e:
+            print(f'Error rendering view: {e}')
+            abort(404,message=f'Request was not found by ID')
+    except ValidationError as error:
+        return error.messages
+    finally:
+        pass

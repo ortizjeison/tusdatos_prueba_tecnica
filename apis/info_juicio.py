@@ -20,11 +20,25 @@ def get_info_juicio(idJuicio):
       'host': 'api.funcionjudicial.gob.ec'
     }
 
-    proxies = {'http': 'http://v59blt8ofjnzfke:omxlc0wlg57a0jn@rp.proxyscrape.com:6060'}
     
     response = request("GET", url,headers,payload)
     
-    return response.json()
+
+    juicio_cleaned = []
+
+    for juicio in response.json():
+        juicio = {
+            "idJuicio": juicio.get('idJuicio'),
+            "nombreDelito": juicio.get('nombreDelito'),
+            "fechaIngreso": juicio.get('fechaIngreso'),
+            "nombreMateria": juicio.get('nombreMateria'),
+            "nombreTipoAccion": juicio.get('nombreTipoAccion')
+            }
+        
+        juicio_cleaned.append(juicio)
+
+
+    return juicio_cleaned
 
 
 if __name__ == "__main__":

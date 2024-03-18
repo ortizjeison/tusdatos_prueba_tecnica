@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados consulta</title>
+</head>
+<style>
+    td, th {
+    border: 0.5px solid #777;
+    padding: 0.5rem;
+    text-align: center;
+}
+ 
+table {
+    border-collapse: collapse;
+    font-family: Consolas,monaco,monospace; 
+}
+ 
+tbody tr:nth-child(odd) {
+    background: #eee;
+}
+</style>
+<body>
+<h2>Resultados de la consulta {{id}}</h2>
+<h4>Documento: {{documento}}</h4>
+<h4>Tipo de consulta: {{tipo_consulta}}</h4>
+<h4>Fecha de consulta: {{fecha_de_consulta}}</h4>
+<h4>Número de registros: {{num_registros}}</h4>
+{{ table | safe }}
+</body>
+</html>

@@ -14,7 +14,7 @@ def request(method,url,headers,payload):
                 continue
             else:
                 if attempt > 0:
-                    print(f'Ready in attempt: {attempt}')
+                    print(f'Ready in attempt: {attempt+1}')
                 break
         except Exception as e:
             print(f'Exteption {e}')

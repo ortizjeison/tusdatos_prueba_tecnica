@@ -42,7 +42,23 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
         database = db.getDb('errors.json')
         database.add(error_log)
 
-    return resp 
+
+    actuaciones_cleaned = []
+
+    for actuacion in resp:
+        actuacion = {
+            "codigo": actuacion.get('codigo'),
+            "idJudicatura": actuacion.get('idJudicatura'),
+            "idJuicio": actuacion.get('idJuicio'),
+            "fecha": actuacion.get('fecha'),
+            "tipo": actuacion.get('tipo'),
+            "actividad": actuacion.get('actividad')
+            }
+        
+        actuaciones_cleaned.append(actuacion)
+
+
+    return actuaciones_cleaned
 
 if __name__ == "__main__":
     actuaciones_judiciales = get_actuaciones_judiciales("26010324", '09332202403102', 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL', "27384010", 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL')

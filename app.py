@@ -111,6 +111,9 @@ class queryResults(Schema):
     #define input field and validation
     id = fields.Integer(required=True)
 
+class queryView(Schema):
+    documento = fields.String(required=True, validate=validate.Length(min=13,max=13))
+    tipo_consulta = fields.String(required=True, validate=validate.OneOf({'demandado','demandante'}))
 
 @app.get('/consultarResultados')
 @app.auth_required(auth)
@@ -149,28 +152,29 @@ def docsView():
 @app.route('/verResultados')
 def resultsView():
 
-    id = request.args.get("id")
+    documento = request.args.get("documento")
+    tipo_consulta = request.args.get("tipo_consulta")
 
     #Load Schema
-    schema = queryResults()
+    schema = queryView()
 
     #Set input data
-    inputData = {"id": id}
+    inputData = {"documento":documento,"tipo_consulta":tipo_consulta}
     try:
         schema.load(inputData)
-        print(f"consultando resultados {id}")
-
         #Run query scripts
         try:
-            database = db.getDb('database.json')
-            results = database.getById(id)
-            
-            tipo_consulta = results['tipo_consulta']
-            documento = results['documento']
-            fecha_de_consulta = results['fecha_de_consulta']
-            id = results['id']
 
-            causas = results['causas']
+            
+            if tipo_consulta == 'demandado':
+                result = query_demandado(documento)
+            else:
+                result = query_demandante(documento)
+  
+            fecha_de_consulta = result['fecha_de_consulta']
+            id = result['id']
+
+            causas = result['causas']
             num_registros=len(causas)
             table = json2html.convert(json = json.dumps(causas))
             return render_template(template_name_or_list='/resultados.html',

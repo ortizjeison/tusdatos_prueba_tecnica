@@ -72,7 +72,6 @@ def contar_causas_demandante(documento):
 
     response = request("POST", url,headers,payload,)
     
-    print("Contar_causas done")
     return response.text
 
 

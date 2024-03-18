@@ -45,7 +45,7 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
 
     actuaciones_cleaned = []
 
-    for actuacion in resp:
+    for actuacion in response.json():
         actuacion = {
             "codigo": actuacion.get('codigo'),
             "idJudicatura": actuacion.get('idJudicatura'),

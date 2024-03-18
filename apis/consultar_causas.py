@@ -99,7 +99,6 @@ def consultar_causas_demandante(num_causas,documento):
             }
         
         cleaned_response.append(causa_cleaned)
-    print("Consultar_causas Done")
     return cleaned_response 
 
 

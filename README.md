@@ -20,7 +20,7 @@ La documentación de estas pruebas, puede ser visualizado en documentacion_prueb
 
 ## API
 
-Para el desarrollo del API se implementaron las librerías Flask y APIFlask.
+Para el desarrollo del API se implementaron las librerías Flask y APIFlask. De igual forma, marshmallow para la validación de los campos.
 
 La documentación del uso del API puede encontrarse en el endpoint:
 http://127.0.0.1:5000/apiDoc y en https://app.swaggerhub.com/apis/ortizjeison/my-project/1.0.0
@@ -39,6 +39,14 @@ userB:So_I_Do
 Para la vista se desarrolló el endpoint /verResultados, el cual recibe un documento y un tipo de consulta (demandado, demandante). Luego de recibir la petición, se ejecuta el script que realiza las consultas, y finalmente se renderiza las respuestas de forma tabular, este proceso puede tomar unos cuantos minutos, dependiendo la cantidad de registros.
 
 ![Vista Resultados](static/vista_resultados.png)
+
+
+
+## Instalación:
+1. Crear un ambiente virtual de python
+2. Activar el ambiente virtual
+3. Instalar las dependencias (ver requierements.txt)
+4. Ejecutar el API (flask run --reload)
 
 ## Authors
 

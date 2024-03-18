@@ -7,14 +7,14 @@ Para realizar la extracción de los datos, se hizo un proceso de ingeniería inv
 ### Base de datos
 Para el almacenamiento de la información, se utilizó un archivo .json, el cual es administrado haciendo uso de la librería pysondb, para tratar dicho archivo como una base de datos, pudiendo así realizar operaciones CRUD con mayor fiabilidad:
 
-![DB Example]("/static/db.png")
+![DB Example]("static/db.png")
 
 ### Casos de prueba
 En cuanto a las pruebas de ejecución en paralelo de los servicios consultarDemandado y consultarDemandante, se ejecutan 15 peticiones en paralelo al respectivo endpoint, haciendo uso de un script en javascript ejecutado en un servidor local de nodeJs. Para validar que la información fue extraída correctamente, se valida al finalizar la prueba, que no hay registros en la base de datos de errores (request_errors.json).
 
-![Test Example]("/static/consola_test.png")
+![Test Example]("static/consola_test.png")
 
-![Test Example]("/static/consola_test2.png")
+![Test Example]("static/consola_test2.png")
 
 La documentación de estas pruebas, puede ser visualizado en documentacion_pruebas.pdf (/documentacion_pruebas.pdf)
 
@@ -32,7 +32,7 @@ Se implementó una autenticación básica, en este caso, los usuarios registrado
 
 Para la vista se desarrolló el endpoint /verResultados, el cual recibe un documento y un tipo de consulta (demandado, demandante). Luego de recibir la petición, se ejecuta el script que realiza las consultas, y finalmente se renderiza las respuestas de forma tabular, este proceso puede tomar unos cuantos minutos, dependiendo la cantidad de registros.
 
-![Vista Resultados]("/static/vista_resultados.png")
+![Vista Resultados]("static/vista_resultados.png")
 
 ## Authors
 

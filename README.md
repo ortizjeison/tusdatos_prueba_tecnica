@@ -58,7 +58,7 @@ Para la vista se desarrolló el endpoint /verResultados, el cual recibe un docum
 3. Instalar las dependencias (ver requierements.txt)
 4. Ejecutar el API (flask run --reload)
 
-## Authors
+## Autor
 
 - [Jeison Fernelix Ortiz López](https://github.com/ortizjeison)
 

@@ -4,8 +4,18 @@
 ## WEB SCRAPING
 Para realizar la extracción de los datos, se hizo un proceso de ingeniería inversa del portal web y se determinó que las APIs que éste emplea en su backend.
 
+## Técnicas de extracción de datos
+Dado que en ocasiones las apis suelen bloquear las peticiones, se implementó un proxy residencial de Ecuador, el cual tiene un TTL y va rotando para evitar realizar las peticiones con la misma IP, permitiendo así consultas de forma masiva, de igual forma, se implementó una lógica de reintentos para los requests que se realizan.
+
+## Logs
+Para hacer seguimiento del funcionamiento de los scripts, se crearon dos bases de datos (archivos .json) para registrar los errores, estos son:
+
+requests_errors.json : Allí se registran los errores en caso de que alguna de las peticiones no se pueda realizar de forma correcta en la cantidad de reintentos especificada.
+
+errors.json: En este archivo se registran los errores internos del servidor, ya que para algunos registros, las APIS retornan un error interno del backend, aún retornando un código 200.
+
 ### Base de datos
-Para el almacenamiento de la información, se utilizó un archivo .json, el cual es administrado haciendo uso de la librería pysondb, para tratar dicho archivo como una base de datos, pudiendo así realizar operaciones CRUD con mayor fiabilidad:
+Para el almacenamiento de la información, se utilizó un archivo .json, el cual es administrado haciendo uso de la librería pysondb, para tratar dicho archivo como una base de datos, permitiendo así realizar operaciones CRUD con mayor fiabilidad:
 
 ![DB Example](static/db.png)
 

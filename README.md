@@ -4,10 +4,10 @@
 ## WEB SCRAPING
 Para realizar la extracción de los datos, se hizo un proceso de ingeniería inversa del portal web y se determinó que las APIs que éste emplea en su backend.
 
-## Técnicas de extracción de datos
+### Técnicas de extracción de datos
 Dado que en ocasiones las apis suelen bloquear las peticiones, se implementó un proxy residencial de Ecuador, el cual tiene un TTL y va rotando para evitar realizar las peticiones con la misma IP, permitiendo así consultas de forma masiva, de igual forma, se implementó una lógica de reintentos para los requests que se realizan.
 
-## Logs
+### Logs
 Para hacer seguimiento del funcionamiento de los scripts, se crearon dos bases de datos (archivos .json) para registrar los errores, estos son:
 
 requests_errors.json : Allí se registran los errores en caso de que alguna de las peticiones no se pueda realizar de forma correcta en la cantidad de reintentos especificada.

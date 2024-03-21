@@ -1,4 +1,4 @@
-from .custom_requests import request
+from apis import custom_requests
 import json
 
 
@@ -34,7 +34,7 @@ def consultar_causas_demandado(num_causas,documento):
     'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = request("POST", url, headers,payload)
+    response = custom_requests.request("POST", url, headers,payload)
 
     cleaned_response = []
 
@@ -84,7 +84,7 @@ def consultar_causas_demandante(num_causas,documento):
     'host': 'api.funcionjudicial.gob.ec'
     }
 
-    response =request("POST", url, headers, payload)
+    response = custom_requests.request("POST", url, headers, payload)
 
     cleaned_response = []
 

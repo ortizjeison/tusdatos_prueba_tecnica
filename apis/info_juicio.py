@@ -1,4 +1,4 @@
-from .custom_requests import request
+from apis import custom_requests
 
 
 def get_info_juicio(idJuicio):
@@ -21,7 +21,7 @@ def get_info_juicio(idJuicio):
     }
 
     
-    response = request("GET", url,headers,payload)
+    response = custom_requests.request("GET", url,headers,payload)
     
 
     juicio_cleaned = []

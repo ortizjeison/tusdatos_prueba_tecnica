@@ -1,4 +1,4 @@
-from .custom_requests import request
+from apis import custom_requests
 import json
 
 
@@ -34,7 +34,9 @@ def contar_causas_demandado(documento):
     'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = request("POST", url,headers,payload)
+    response = custom_requests.request("POST", url,headers,payload)
+    assert response.status_code == 200, f'Server response: {response.status_code}'
+
     return response.text
 
 
@@ -70,14 +72,7 @@ def contar_causas_demandante(documento):
     'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = request("POST", url,headers,payload,)
-    
+    response = custom_requests.request("POST", url,headers,payload,)
+    assert response.status_code == 200, f'Server response: {response.status_code}'
+
     return response.text
-
-
-if __name__ == "__main__":
-    num_causas_demandante = contar_causas_demandante("0968599020001")
-    print(num_causas_demandante)
-
-    num_causas_demandado = contar_causas_demandado("1791251237001")
-    print(num_causas_demandado)

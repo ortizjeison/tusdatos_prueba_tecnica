@@ -1,4 +1,4 @@
-from .custom_requests import request
+from apis import custom_requests
 
 def get_datos_generales(idJuicio):
     
@@ -20,7 +20,7 @@ def get_datos_generales(idJuicio):
     'Cookie': 'CJ=2870345994.31775.0000'
     }
 
-    response = request("GET", url, headers,payload)
+    response = custom_requests.request("GET", url, headers,payload)
 
     return response.json()
 

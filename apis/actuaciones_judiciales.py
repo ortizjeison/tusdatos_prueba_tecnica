@@ -1,4 +1,4 @@
-from .custom_requests import request
+from apis import custom_requests
 import json
 from pysondb import db
 from datetime import datetime
@@ -34,7 +34,7 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
 
 
     try:
-        response = request("POST", url, headers,payload)
+        response = custom_requests.request("POST", url, headers,payload)
         resp = response.json()
     except Exception as e:
         error_log = {'timestamp':str(datetime.now()),'idJuicio': idJuicio, "Server_response": response.text, "exception": str(e)}

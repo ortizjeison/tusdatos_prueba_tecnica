@@ -17,10 +17,12 @@ def query_demandado(documento):
         num_causas = contar_causas.contar_causas_demandado(documento)
     except Exception as e:
             print(f'Error when calling contar_causas_demandado: {e}')
+            raise AssertionError()
     try:
         causas = consultar_causas.consultar_causas_demandado(num_causas,documento)
     except Exception as e:
             print(f'Error when calling consultar_causas_demandado: {e}')
+            raise AssertionError()
 
     #Query info_juicio for each element (juicio)
 
@@ -32,11 +34,13 @@ def query_demandado(documento):
             datos_juicio = info_juicio.get_info_juicio(id_juicio)
         except Exception as e:
             print(f'Error when calling get_info_juicio: {e} ({id_juicio})')
+            raise AssertionError()
         
         try:            
             datos_generales_juicio = datos_generales.get_datos_generales(id_juicio)
         except Exception as e:
             print(f'Error when calling get_datos_generales: {e} ({id_juicio})')
+            raise AssertionError()
 
         #Get data from datos_generales to query actuaciones_judiciales
         idMovimientoJuicioIncidente = datos_generales_juicio[0].get('lstIncidenteJudicatura')[0].get('idMovimientoJuicioIncidente')
@@ -120,5 +124,3 @@ def query_demandante(documento):
     database.add(response)
     return response
 
-if __name__ == "__main__":
-    print(query_demandado('1791251237001'))

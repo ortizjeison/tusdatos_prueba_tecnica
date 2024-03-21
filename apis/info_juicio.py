@@ -22,7 +22,7 @@ def get_info_juicio(idJuicio):
 
     
     response = custom_requests.request("GET", url,headers,payload)
-    
+    assert response.status_code == 200, f'Server response: {response.status_code}'
 
     juicio_cleaned = []
 
@@ -39,8 +39,3 @@ def get_info_juicio(idJuicio):
 
 
     return juicio_cleaned
-
-
-if __name__ == "__main__":
-    info_juicio = get_info_juicio("13284202406765")
-    print(info_juicio)

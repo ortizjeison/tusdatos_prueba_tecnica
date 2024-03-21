@@ -59,7 +59,3 @@ def get_actuaciones_judiciales(idMovimientoJuicioIncidente,idJuicio,idJudicatura
 
 
     return actuaciones_cleaned
-
-if __name__ == "__main__":
-    actuaciones_judiciales = get_actuaciones_judiciales("26010324", '09332202403102', 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL', "27384010", 'UNIDAD JUDICIAL CIVIL CON SEDE EN EL CANTÓN GUAYAQUIL')
-    print(actuaciones_judiciales)

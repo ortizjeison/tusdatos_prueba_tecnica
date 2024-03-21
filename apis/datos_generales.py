@@ -23,7 +23,3 @@ def get_datos_generales(idJuicio):
     response = custom_requests.request("GET", url, headers,payload)
 
     return response.json()
-
-if __name__ == "__main__":
-    datos_generales = get_datos_generales("13284202406765")
-    print(datos_generales)

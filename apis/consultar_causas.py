@@ -35,6 +35,7 @@ def consultar_causas_demandado(num_causas,documento):
     }
 
     response = custom_requests.request("POST", url, headers,payload)
+    assert response.status_code == 200, f'Server response: {response.status_code}'
 
     cleaned_response = []
 
@@ -85,6 +86,7 @@ def consultar_causas_demandante(num_causas,documento):
     }
 
     response = custom_requests.request("POST", url, headers, payload)
+    assert response.status_code == 200, f'Server response: {response.status_code}'
 
     cleaned_response = []
 
@@ -99,12 +101,4 @@ def consultar_causas_demandante(num_causas,documento):
             }
         
         cleaned_response.append(causa_cleaned)
-    return cleaned_response 
-
-
-if __name__ == "__main__":
-    causas_demandado = consultar_causas_demandado(105,'1791251237001')
-    #print(causas_demandado)
-
-    causas_demandante = consultar_causas_demandante(157,'0968599020001')
-    #print(causas_demandado)
+    return cleaned_response

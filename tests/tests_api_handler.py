@@ -11,3 +11,6 @@ from apis import api_handler
 
 def tests_query_demandado():
     api_handler.query_demandado('1791251237001')
+
+def tests_query_demandante():
+    api_handler.query_demandado('0992339411001')

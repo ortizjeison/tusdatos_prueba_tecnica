@@ -13,13 +13,16 @@ Flask==3.0.2
 Flask-HTTPAuth==4.8.0
 flask-marshmallow==1.2.0
 idna==3.6
+iniconfig==2.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.3
 json2html==1.3.0
 MarkupSafe==2.1.5
 marshmallow==3.21.1
 packaging==24.0
+pluggy==1.4.0
 pysondb==1.6.7
+pytest==8.1.1
 requests==2.31.0
 urllib3==2.2.1
 wcwidth==0.2.13
